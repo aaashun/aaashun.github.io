@@ -1,0 +1,4 @@
+name: aaashun's site
+markdown: redcarpet
+pygments: true
+permalink: /blog/:title.html

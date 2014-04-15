@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 一种web service api授权设计
+tags: webservice
 ---
 
 这段时间在设计web service api的安全授权机制, 目前给每个应用分配了appId和secretKey, 主要考虑两种情况: 1. 防篡改, 2. 防止重复请求

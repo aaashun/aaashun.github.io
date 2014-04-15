@@ -1,6 +1,7 @@
 ---
 layout: post
 title: mingw-w64安装及与aimake的集成
+tags: aimake mingw
 ---
 
 今天用了一下mingw-w64(http://mingw-w64.sourceforge.net/), 用下来感觉比mingw兼容性更强, 比如pthread_t是整型而不是奇葩的结构体.

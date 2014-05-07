@@ -1,6 +1,7 @@
 ---
 layout: post
 title: how to recover the removed collection in mongodb
+comments: true
 tags: mongodb
 ---
 

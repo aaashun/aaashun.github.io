@@ -1,6 +1,7 @@
 ---
 layout: post
 title: version `GLIBC_2.7′ not found, 让程序兼容旧系统
+comments: true
 tags: 
 ---
 

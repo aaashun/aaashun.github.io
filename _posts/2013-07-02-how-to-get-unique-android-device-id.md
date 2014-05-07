@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 获取android设备的唯一ID
+comments: true
 tags: android
 ---
 

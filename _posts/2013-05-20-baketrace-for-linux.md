@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 程序debug之backtrace - linux
+comments: true
 tags: debug
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: introduce aimake
+comments: true
 tags: aimake
 ---
 

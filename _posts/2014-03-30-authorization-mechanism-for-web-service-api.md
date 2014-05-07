@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 一种web service api授权设计
+comments: true
 tags: webservice
 ---
 

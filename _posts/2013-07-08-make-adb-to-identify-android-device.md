@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 让adb识别android设备
+comments: true
 tags: android
 ---
 

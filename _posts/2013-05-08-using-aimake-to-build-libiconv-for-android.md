@@ -1,6 +1,7 @@
 ---
 layout: post
 title: using aimake to build libiconv for android
+comments: true
 tags: aimake
 ---
 今日一同事在android项目中用到iconv, 需要编译一个android版的静态库, 折腾了好久也没编译成功. 直接使用ndk编译libiconv关键是配置好交叉编译文件(Android.mk), 这里给出一份更简单的方法.

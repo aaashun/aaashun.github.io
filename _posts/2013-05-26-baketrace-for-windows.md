@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 程序debug之backtrace - windows
+comments: true
 tags: debug
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 做移动开发应该了解的arm及编译优化
+comments: true
 tags: arm aimake
 ---
 

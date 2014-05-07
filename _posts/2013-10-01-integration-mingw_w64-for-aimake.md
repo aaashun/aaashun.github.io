@@ -1,6 +1,7 @@
 ---
 layout: post
 title: mingw-w64安装及与aimake的集成
+comments: true
 tags: aimake mingw
 ---
 

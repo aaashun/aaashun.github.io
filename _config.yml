@@ -1,4 +1,4 @@
 name: aaashun's site
 markdown: redcarpet
-pygments: true
+highlighter: true
 permalink: /blog/:title.html

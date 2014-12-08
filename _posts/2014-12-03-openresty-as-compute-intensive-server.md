@@ -1,11 +1,13 @@
 ---
 layout: post
-title: openresty用于计算密集型服务
+title: openresty用于计算密集型服务的实践
 comments: true
 tags: nginx lua openresty
 ---
 
 这篇文章更多的是记录了设计的过程, 不仅仅是设计的结果.
+
+我把计算密集型服务分为三类: 1. 发送请求后异步计算结果 2. 发送请求后等待计算结果 3. 发送请求数据流时服务端边计算边返回计算结果. 对于第1类, 一般接收到请求后把任务插入队列, 异步处理完后通知客户端即可, 对于第2类, 用多nginx worker即可很好解决, 本文主要讲的是第3类, 在我的实际项目中与客户端的双向通信协议是websocket, 数据流封装在多个webwsocket frame里边接收边处理, 处理过程中还会有一些临时结果需要用websocket frame实时返回给客户端, 这样计算和网络IO放在一起会冲突. (多谢OpenResty社区G_will, mem phis, Nero.Ping提出异议, 在此说明一下分类)
 
 ### 1. 原服务那些事
 时间回到2011年, 几个初生牛犊的工程师用c语言完整实现了server/client, server端又是分三层: httpa, core-proxy, core-service. server端实现时主要参考了nginx, 但是仅实现了我们所需要的特性, 当时的两个NB理由:
@@ -59,6 +61,8 @@ fastcgi在这里只是代理的角色, 让应用服务程序与web服务程序�
 #### 2.2 posix.fork()创建计算进程 
 ngx_lua没有提供fork方法, 我使用的是luaposix, luaposix提供了丰富的posix方法的lua绑定.
 
+另外由于还需要对计算进程有更灵活的控制, 比如某个计算耗时异常时需要强行kill, 某个计算进程crash时的特殊处理, 所以选择了自已fork并管理计算进程.
+
 #### 2.3 nginx worker和计算进程间通过tcp连接通信
 为了避免block主循环, nginx worker端的服务代码里使用cosocket与计算进程通信即可.
 
@@ -71,6 +75,8 @@ lua作为服务端脚本有诸多优点:
 * 原生支持coroutine, 依靠coroutine完成中断/重入的切换开销很小
 
 我倾向于所有服务逻辑都用lua编写, 一些核心的计算内核的c代码binding到lua, 作为lua模块在lua里调用.
+
+另外ffi也能完成绑定, 我相信性能上也更好, 这里没有用ffi是因为有的计算模块不仅要运行在服务器还有可能运行在没有luajit的移动app里, 为了保证接口一致, 目前是全部做了lua绑定, 并提供一致的lua接口, 需要再优化时会考虑ffi. (多谢OpenResty社区G_will建议)
 
 #### 2.5 对计算进程的一些特殊要求
 不能使用ngx.socket, ngx.sleep, ngx.timer, ngx.log, ngx.thread等ngx_lua里的'同步非阻塞'的方法, 在计算进程用luasocket与nginx worker进行同步阻塞的tcp通信, 在计算进程里只需埋头计算, 计算完成后直接退出进程即可.
@@ -86,7 +92,7 @@ lua作为服务端脚本有诸多优点:
 
 #### 2.7 一些优化的设计和实现
 * 共享内存<br/>
-linux在fork时对内存的管理是写时拷贝(copy-on-write), 当有大量数据属于只读型时, 可以在`init_worker_by_lua`里一次性将资源加载到内存里做共享, 可以节省大量物理内存, 以及节省加载时间.
+linux在fork时对内存的管理是写时拷贝(copy-on-write), 当有大量数据属于只读型时, 可以在`init_worker_by_lua`里一次性将资源加载到内存里做共享, 可以节省大量物理内存, 以及节省加载时间. 在我的实际项目中有10GB量线的资源需要一次性load到内存.
 
 * 进程池<br/>
 在我的intel i5机器上posix.fork()的耗时是毫秒级, 这当然会block住主循环的, 可以加一个进程池管理机制, 保留一些空闲进程, 同时增加计算进程的重复利用来做一定程度上的优化.

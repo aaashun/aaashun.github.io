@@ -7,7 +7,9 @@ tags: nginx lua openresty
 
 这篇文章更多的是记录了设计的过程, 不仅仅是设计的结果.
 
-我把计算密集型服务分为三类: 1. 发送请求后异步计算结果 2. 发送请求后等待计算结果 3. 发送请求数据流时服务端边计算边返回计算结果. 对于第1类, 一般接收到请求后把任务插入队列, 异步处理完后通知客户端即可, 对于第2类, 用多nginx worker即可很好解决, 本文主要讲的是第3类, 在我的实际项目中与客户端的双向通信协议是websocket, 数据流封装在多个webwsocket frame里边接收边处理, 处理过程中还会有一些临时结果需要用websocket frame实时返回给客户端, 这样计算和网络IO放在一起会冲突. (多谢OpenResty社区G_will, mem phis, Nero.Ping提出异议, 在此说明一下分类)
+
+
+我把计算密集型服务分为三类: 1. 发送请求后异步计算结果 2. 发送请求后等待计算结果 3. 发送请求数据流时服务端边计算边返回计算结果. 对于第1类, 一般接收到请求后把任务插入队列, 异步处理完后通知客户端即可, 对于第2类, 用多nginx worker即可很好解决, 本文主要讲的是第3类, 在我的实际项目中与客户端的双向通信协议是websocket, 数据流封装在多个webwsocket frame里边接收边处理, 处理过程中还会有一些临时结果需要用websocket frame实时返回给客户端, 这样计算和网络IO放在一起会冲突. (多谢<a href="https://groups.google.com/forum/#!topic/openresty/ynGVzgywGic">OpenResty社区G_will, mem phis, Nero.Ping等指正</a>, 在此说明一下分类)
 
 ### 1. 原服务那些事
 时间回到2011年, 几个初生牛犊的工程师用c语言完整实现了server/client, server端又是分三层: httpa, core-proxy, core-service. server端实现时主要参考了nginx, 但是仅实现了我们所需要的特性, 当时的两个NB理由:

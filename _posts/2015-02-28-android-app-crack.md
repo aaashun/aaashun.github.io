@@ -43,7 +43,6 @@ tags: android
 
 有时候运气也很重要, 比如java代码是混淆过的, 反编译后看到的类名和变量名都是a, B, C这类无规则的命名, 只能根据逻辑来猜测, 曾经和混淆过的代码, 眼都花了, 好在jeb可以很方便地重命名. 再比如so里反汇编过的代码, 需要猜相关字符串, 函数名, 比如要绕过授权, 先搜check, license之类关键词再上下找jmp, cmp之类比较或跳转的指令, 很可能忙活好几天最后只需要改一两个字节.
 
-网上有也不少例子可以参考, 例如:
-
- * http://www.52pojie.cn/thread-225364-1-1.html
- * http://www.2cto.com/kf/201412/357218.html
+网上有也不少例子可以参考的
+<a href="http://www.52pojie.cn/thread-225364-1-1.html"></a>
+<a href="http://www.2cto.com/kf/201412/357218.html"></a>

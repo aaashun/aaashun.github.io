@@ -2,3 +2,4 @@ name: aaashun's site
 markdown: redcarpet
 highlighter: true
 permalink: /blog/:title.html
+auto_ids: true

@@ -4,46 +4,12 @@ title: useful gitlab help
 comments: true
 tags: git github gitlab
 ---
-
 当时为鼓动大家把项目迁到gitlab写的文档, 稍作修改, 分享出来
 
 gitpages和gitlab从同一个md生成的html样式有差异, 原来排版没这么丑的
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+{:toc}
 
-- [useful gitlab help](#useful-gitlab-help)
-    - [设置git](#%E8%AE%BE%E7%BD%AEgit)
-    - [快速入门](#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8)
-    - [工作流程](#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B)
-        - [develop阶段工作流程](#develop%E9%98%B6%E6%AE%B5%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B)
-        - [release阶段工作流程](#release%E9%98%B6%E6%AE%B5%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B)
-    - [常用操作](#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C)
-        - [创建新分支](#%E5%88%9B%E5%BB%BA%E6%96%B0%E5%88%86%E6%94%AF)
-        - [签出分支](#%E7%AD%BE%E5%87%BA%E5%88%86%E6%94%AF)
-        - [列出所有branch](#%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89branch)
-        - [删除本地分支](#%E5%88%A0%E9%99%A4%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF)
-        - [删除远程分支](#%E5%88%A0%E9%99%A4%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF)
-        - [查看本地修改](#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9)
-        - [提交本地修改](#%E6%8F%90%E4%BA%A4%E6%9C%AC%E5%9C%B0%E4%BF%AE%E6%94%B9)
-        - [推送到远程仓库](#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93)
-        - [回滚](#%E5%9B%9E%E6%BB%9A)
-        - [同步当前分支的更新](#%E5%90%8C%E6%AD%A5%E5%BD%93%E5%89%8D%E5%88%86%E6%94%AF%E7%9A%84%E6%9B%B4%E6%96%B0)
-        - [同步其它分支的更新](#%E5%90%8C%E6%AD%A5%E5%85%B6%E5%AE%83%E5%88%86%E6%94%AF%E7%9A%84%E6%9B%B4%E6%96%B0)
-        - [fork后同步上游仓库的更新](#fork%E5%90%8E%E5%90%8C%E6%AD%A5%E4%B8%8A%E6%B8%B8%E4%BB%93%E5%BA%93%E7%9A%84%E6%9B%B4%E6%96%B0)
-        - [引用公共代码](#%E5%BC%95%E7%94%A8%E5%85%AC%E5%85%B1%E4%BB%A3%E7%A0%81)
-    - [project管理](#project%E7%AE%A1%E7%90%86)
-        - [create](#create)
-        - [fork](#fork)
-        - [permission](#permission)
-        - [group](#group)
-        - [transfer](#transfer)
-    - [其它](#%E5%85%B6%E5%AE%83)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-<br/>
 <br/>
 # useful gitlab help
 ## 设置git
